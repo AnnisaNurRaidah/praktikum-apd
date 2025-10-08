@@ -59,6 +59,7 @@ else:
             else:
                 jenistiket = "VVIP"
                 hargapertiket = 150000
+            
             print(f"\nAnda memilih: Tiket {jenistiket}")
             print(f"Harga per tiket: Rp {hargapertiket:}")
             
@@ -67,9 +68,10 @@ else:
                 jumlahtiket = input("Masukkan jumlah tiket: ")
                 jumlahtiket = int(jumlahtiket)
                 if jumlahtiket > 0:
-                    jumlahtiket = True
+                    jumlahtiket_valid = True
                 else:
-                        print("Error: Jumlah tiket gak boleh 0!")
+                    print("Error: Jumlah tiket harus lebih dari 0!")
+            
             totalbayar = 0
             for i in range(jumlahtiket):
                 totalbayar = totalbayar + hargapertiket
@@ -91,31 +93,30 @@ else:
             else:
                 diskon = 0
             
-            print ()
-            print("=" * 60)
+            print("\n" + "=" * 60)
             print(" " * 20 + "STRUK PEMBELIAN")
             print("=" * 60)
             print(f"Nama Pembeli            : {nama}")
             print(f"Jenis Tiket             : {jenistiket}")
-            print(f"Harga per Tiket         : Rp {hargapertiket: }")
+            print(f"Harga per Tiket         : Rp {hargapertiket:}")
             print(f"Jumlah Tiket            : {jumlahtiket}")
             print("-" * 60)
-            print(f"Harga sebelum diskon    : Rp {totalsebelumdiskon: }")
+            print(f"Harga sebelum diskon    : Rp {totalsebelumdiskon:}")
             
             if persendiskon > 0:
-                print(f"Diskon ({persendiskon}%)            : Rp {diskon: }")
+                print(f"Diskon ({persendiskon}%)            : Rp {diskon:}")
                 print("-" * 60)
-                print(f"Total Bayar             : Rp {totalbayar: }")
+                print(f"TOTAL BAYAR             : Rp {totalbayar:}")
                 print("=" * 60)
                 print(f"Selamat! Anda mendapat diskon {persendiskon}%!")
             elif dapatposter:
                 print("-" * 60)
-                print(f"TotalBayar             : Rp {totalbayar: }")
+                print(f"TOTAL BAYAR             : Rp {totalbayar:}")
                 print("=" * 60)
                 print("Selamat! Anda mendapat Poster Film Eksklusif!")
             else:
                 print("-" * 60)
-                print(f"Total Bayar             : Rp {totalbayar: }")
+                print(f"TOTAL BAYAR             : Rp {totalbayar:}")
                 print("=" * 60)
             
             print("\nTerima kasih atas pembelian Anda!")
@@ -125,11 +126,11 @@ else:
             input("\nTekan Enter untuk kembali ke menu...")
             
         elif pilihan == "4":
-            print()
-            print("=" * 60)
+            print("\n" + "=" * 60)
             print("Terima kasih telah menggunakan layanan kami!")
             print("Sampai jumpa di Bioskop XXO!")
             print("=" * 60)
+            break 
         else:
             print("\nError: Pilihan tidak valid! Pilih angka 1-4.")
             input("Tekan Enter untuk mencoba lagi...")
