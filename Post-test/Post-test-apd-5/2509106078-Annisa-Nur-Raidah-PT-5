@@ -1,9 +1,10 @@
 import os
+
 # Data admin (username, password, role)
 dataadmin = [
     ('hatchu', 's2u', 'admin')
     ]
-# Data Member (username, password (kontak), instrumen, harga, role)
+# Data member (username, password (kontak), instrumen, harga, role)
 daftarmember = [
     ('carmen', '08123456789', 'gitar', 750000, 'member'),
     ('jiwoo', '0811112222', 'piano', 1000000, 'member'),
@@ -21,255 +22,176 @@ while programaktif:
         print("="*40)
         print("SELAMAT DATANG DI KURSUS MUSIK H2H".center(40))
         print("="*40)
-        print("Pilihlah opsi dibawah ini:")
-        print("\n1. Login")
+        print("1. Login")
         print("2. Register")
-        print("3. Keluar")
-        penggunalogin = input("\nPilih opsi (1/2/3): ")
-        if penggunalogin == '1':
+        print("3. Logout")
+        pilih = input("\nPilih opsi (1/2/3): ")
+        if pilih == '1':
             os.system("cls")
             print("-"*50)
             print("LAMAN LOGIN".center(50))
             print("-"*50)
-            namainput = input("Username: ")
-            passwordinput = input("Password: ")
-            masuk = False
-            for data in dataadmin:
-                if data[0] == namainput and data[1] == passwordinput:
+            nama = input("Username: ")
+            password = input("Password: ")
+            for admin in dataadmin:
+                if nama == admin[0] and password == admin[1]:
                     statuslogin = True
-                    masuk = True
-                    namamember = data[0]
-
+                    namamember = admin[0]
                     role = 'admin'
-                    print("\nLOGIN BERHASIL!")
-                    print(f"SELAMAT DATANG DI KURSUS MUSIK H2H {namamember} {role}") 
-                    input("Klik Enter untuk melanjutkan...")
                     break
-            if not masuk:
-                for data in daftarmember:
-                    if data[0] == namainput and data[1] == passwordinput:
-                        statuslogin = True
-                        masuk = True
-                        namamember = data[0]
-                        role = 'member'
-                        print("\nLOGIN BERHASIL!")
-                        print(f"SELAMAT DATANG DI KURSUS MUSIK H2H {namamember} {role}")
-                        input("Klik Enter untuk melanjutkan...")
-                        break
-            if not masuk:
-                print("Error: Username atau Password salah!")
-                input("Klik Enter untuk melanjutkan...")
-        elif penggunalogin == '2':
-            os.system("cls")
-            print("-"*40)
-            print("LAMAN REGISTRASI".center(40))
-            print("-"*40)
-            namaakunbaru = input("Username: ")
-            akunsama = False
-            for akses in dataadmin:
-                if akses[0] == namaakunbaru:
-                    akunsama = True
+            for member in daftarmember:
+                if nama == member[0] and password == member[1]:
+                    statuslogin = True
+                    namamember = member[0]
+                    role = 'member'
                     break
-            if not akunsama:
-                for akses in daftarmember:
-                    if akses[0] == namaakunbaru:
-                        akunsama = True
-                        break
-            if akunsama:
-                print("NAMA YANG DIMASUKKAN SUDAH TERDAFTAR")
+            if statuslogin:
+                print(f"\nLogin berhasil sebagai {namamember} ({role})")
                 input("Klik Enter untuk melanjutkan...")
             else:
-                passwordbaru = input("Password (kontak2): ")
-                instrumenbaru = input("Instrumen (gitar/piano): ")
-                if instrumenbaru == 'gitar':
-                    hargabaru = 750000
-                elif instrumenbaru == 'piano':
-                    hargabaru = 1000000
-                else:
-                    hargabaru = 0 
-                daftarmember.append((namaakunbaru, passwordbaru, instrumenbaru, hargabaru, 'member'))
-                print("PENDAFTARAN AKUN ANDA SUKSES!")
+                print("Username atau Password salah!")
                 input("Klik Enter untuk melanjutkan...")
-        elif penggunalogin == '3':
+        elif pilih == '2':
+            os.system("cls")
+            print("-"*40)
+            print("REGISTRASI AKUN".center(40))
+            print("-"*40)
+            namabaru = input("Username: ")
+            passwordbaru = input("Password (kontak): ")
+            instrumen = input("Instrumen (gitar/piano): ")
+            if instrumen == 'gitar':
+                harga = 750000
+            else:
+                harga = 1000000
+            daftarmember.append((namabaru, passwordbaru, instrumen, harga, 'member'))
+            print("PENDAFTARAN AKUN ANDA SUKSES")
+            input("Klik Enter untuk melanjutkan...")
+        else: 
+            pilih == '3'
             programaktif = False
             print("\nTERIMA KASIH SUDAH BERKUNJUNG DI KURSUS MUSIK H2H.")
-        else:
-            print("Eror: opsi tidak valid, pilih 1-3.")
-            input("Klik Enter untuk melanjutkan...")
     else:
         if role == 'admin':
             os.system("cls")
-            print("=" * 40)
-            print("LAMAN LOGIN ADMIN".center(40))
-            print("=" * 40)
+            print("="*40)
+            print("MENU ADMIN".center(40))
+            print("="*40)
             print("1. Tambah Member")
-            print("2. Tampilkan Daftar Member")
+            print("2. Tampilkan Member")
             print("3. Edit Member")
             print("4. Hapus Member")
             print("5. Logout")
-            adminlogin = input("Pilih antara opsi (1-5): ")
-            if adminlogin == '1':
+            pilihan = input("Pilih opsi (1-5): ")
+            if pilihan == '1':
                 os.system("cls")
                 print("="*30)
                 print("Tambah Member".center(30))
                 print("="*30)
-                print("Instrumen: 1.Gitar 2.Piano")
-                instrumeninput = input("Pilih instrumen (1/2): ")
-                instrumen = {"1": "gitar", "2": "piano"}
-                if instrumeninput in instrumen:
-                    instrumenbaru = instrumen[instrumeninput]
-                    namabaru = input("Nama: ")
-                    kontakbaru = input("Kontak: ")
-                    if instrumenbaru == 'gitar':
-                        hargabaru = 750000
-                    else:
-                        hargabaru = 1000000
-                    daftarmember.append((namabaru, kontakbaru, instrumenbaru, hargabaru, 'member'))
-                    print("Data Member Sukses Di Tambahkan.")
-                    input("Klik Enter untuk melanjutkan...")
+                nama = input("Nama: ")
+                kontak = input("Kontak: ")
+                instrumen = input("Instrumen (gitar/piano): ")
+                if instrumen == 'gitar':
+                    harga = 750000
                 else:
-                    print("Eror: Pilihan yang anda masukkan tidak valid.")
-                    input("Klik Enter untuk melanjutkan...")
-            elif adminlogin == '2':
-                os.system("cls")
-                print("=" * 65)
-                print("Daftar Member".center(65))
-                print("=" * 65)
-                if daftarmember:
-                    print(f"\n{'Nama':<15} {'Kontak':<15} {'Instrumen':<15} {'Harga':<15}")
-                    print("-"*65)
-                    for member in daftarmember:
-                        print(f"{member[0]:<15} {member[1]:<15} {member[2]:<15} Rp {member[3]:<15,}")
-                else:
-                    print("Belum ada member terdaftar.")
+                    harga = 1000000
+                daftarmember.append((nama, kontak, instrumen, harga, 'member'))
+                print("Member berhasil ditambahkan.")
                 input("Klik Enter untuk melanjutkan...")
-            elif adminlogin == '3':
+            elif pilihan == '2':
                 os.system("cls")
-                print("=" * 30)
-                print("Edit Data Peserta".center(30))
-                print("=" * 30)
-                if daftarmember:
-                    jumlah = 0
-                    for peserta in daftarmember:
-                        jumlah += 1
-                        print(f"{jumlah}. {peserta[0]} - {peserta[2]}")
-                    nomorbaru = input(f"Pilih (1-{jumlah}): ")
-                    if nomorbaru.isdigit():
-                        nomorbaru = int(nomorbaru)
-                        if 1 <= nomorbaru <= jumlah:
-                            posisiedit = nomorbaru - 1
-                            print(f"Edit: {daftarmember[posisiedit][0]}")
-                            print("Instrumen baru: 1.Gitar 2.Piano")
-                            instrumeninput = input("Pilih (1/2): ")
-                            instrumen = {"1": "gitar", "2": "piano"}
-                            if instrumeninput in instrumen:
-                                instrumenbaru = instrumen[instrumeninput]
-                                namabaru = input("Nama baru: ")
-                                kontakbaru = input("Kontak baru: ")
-                                if instrumenbaru == 'gitar':
-                                    hargabaru = 750000
-                                else:
-                                    hargabaru = 1000000
-                                daftarmember[posisiedit] = (namabaru, kontakbaru, instrumenbaru, hargabaru)
-                                print("Perubahan data member berhasil")
-                                input("Klik Enter untuk melanjutkan...")
-                            else:
-                                print("Eror: Pilihan anda tidak valid.")
-                                input("Klik Enter untuk melanjutkan...")
-                        else:
-                            print("Eror: Nomor yang anda masukkan tidak valid.")
-                            input("Klik Enter untuk melanjutkan...")
-                    else:
-                        print("Eror: Harus berupa angka")
-                        input("Klik Enter untuk melanjutkan...")
-                else:
-                    print("Eror: Informasi yang anda masukkan tidak valid.")
-                    input("Klik Enter untuk melanjutkan...")
-            elif adminlogin == '4':
+                print("="*60)
+                print("DAFTAR MEMBER".center(60))
+                print("="*60)
+                print(f"\n{'Nama':<15} {'Kontak':<15} {'Instrumen':<15} {'Harga':<15}")
+                print("-"*60)
+                for member in daftarmember:                    
+                    print(f"{member[0]:<15} {member[1]:<15} {member[2]:<15} Rp {member[3]:<15,}")
+                    print("-"*60)
+                input("Klik Enter untuk melanjutkan...")
+            elif pilihan == '3':
                 os.system("cls")
-                print("=" * 40)
-                print("Hapus Member".center(40))
-                print("=" * 40)
-                if daftarmember:
+                print("="*60)
+                print("EDIT MEMBER".center(50))
+                print("="*60)
+                nomor = 1
+                print(f"\n{'nomor':<10} {'Nama':<10} {'Kontak':<15} {'Instrumen':<10} {'Harga':<10}")
+                print("-"*60)
+                for member in daftarmember:                    
+                    print(f"{nomor:<10} {member[0]:<10} {member[1]:<15} {member[2]:<10} Rp {member[3]:<10,}")
+                    nomor = nomor + 1
                     jumlah = 0
-                    for peserta in daftarmember:
-                        jumlah += 1
-                        print(f"{jumlah}. {peserta[0]} - {peserta[2]}")
-                    nomorbuang = input(f"Pilih (1-{jumlah}): ")
-                    if nomorbuang.isdigit():
-                        nomorbuang = int(nomorbuang)
-                        if 1 <= nomorbuang <= jumlah:
-                            posisibuang = nomorbuang - 1
-                            namadibuang = daftarmember[posisibuang][0]
-                            daftarmember.pop(posisibuang)
-                            print(f"'{namadibuang}' dihapus.")
-                            input("Klik Enter untuk melanjutkan...")
-                        else:
-                            print("Eror: Nomor yang anda masukkan tidak valid.")
-                            input("Klik Enter untuk melanjutkan...")
-                    else:
-                        print("Eror: Harus berupa angka")
-                        input("Klik Enter untuk melanjutkan...")
+                for member in daftarmember:
+                    jumlah = jumlah + 1
+                pilih = int(input("\nPilih nomor member: ")) - 1
+                namabaru = input("Nama baru: ")
+                kontakbaru = input("Kontak baru: ")
+                instrumenbaru = input("Instrumen baru: ")
+                if instrumenbaru == 'gitar':
+                    hargabaru = 750000
                 else:
-                    print("Eror: Informasi yang anda masukkan tidak valid.")
-                    input("Klik Enter untuk melanjutkan...")
-            elif adminlogin == '5':
+                    hargabaru = 1000000
+                daftarmember[pilih] = (namabaru, kontakbaru, instrumenbaru, hargabaru, 'member')
+                print("Data berhasil diubah.")
+                input("Klik Enter untuk melanjutkan...")
+            elif pilihan == '4':
+                os.system("cls")
+                print("="*40)
+                print("HAPUS MEMBER".center(40))
+                print("="*40)
+                nomor = 1
+                for member in daftarmember:
+                    print(f"{nomor:<10} {member[0]:<10} {member[2]:<10} Rp {member[3]:<10,}")
+                    nomor = nomor + 1
+                    jumlah = 0
+                for member in daftarmember:
+                    jumlah = jumlah + 1
+                pilihhapus = int(input("Pilih nomor member: ")) - 1
+                daftarmember.pop(pilihhapus)
+                print("Member dihapus.")
+                input("Klik Enter untuk melanjutkan...")
+            else: 
+                pilihan == '5'
                 statuslogin = False
                 namamember = ""
                 role = ""
-                print("TERIMA KASIH SUDAH BERKUNJUNG DI KURSUS MUSIK H2H")
+                print("Logout berhasil.")
                 input("Klik Enter untuk melanjutkan...")
-            else:
-                print("Pilih antara opsi (1-5)")
-                input("Klik Enter untuk melanjutkan...")
-                
         elif role == 'member':
             os.system("cls")
-            print("=" * 30)
-            print(f"Member {namamember} {role}".center(30))
-            print("=" * 30)
-            print("1. Tampil Daftar Member")
+            print("="*30)
+            print(f"MENU MEMBER ({namamember})".center(30))
+            print("="*30)
+            print("1. Tampilkan Daftar Member")
             print("2. Cari Peserta")
             print("3. Logout")
-            opsianggota = input("Pilih antara opsi (1-3): ")
-            if opsianggota == '1':
-                os.system("cls")
-                if daftarmember:
-                    print("="*50)
-                    print("Daftar Peserta".center(50))
-                    print("="*50)
-                    print(f"{'Nama':<15} {'Kontak':<15} {'Instrumen':<15}")
-                    print("-"*50)
-                    for member in daftarmember:
-                        print(f"{member[0]:<15} {member[1]:<15} {member[2]:<15}")
-                else:
-                    print("Eror: Informasi yang anda masukkan tidak valid")
-                input("\nKlik Enter untuk melanjutkan...")
-            elif opsianggota == '2':
+            pilih = input("Pilih (1-3): ")
+            if pilih == '1':
                 os.system("cls")
                 print("="*50)
-                print("Cari Peserta".center(50))
+                print("Daftar Peserta".center(50))
                 print("="*50)
-                carimember = input("Nama atau instrumen: ")
-                daftarcari = []
+                print(member[0],        member[1],      member[2])
+                print("-"*50)
                 for member in daftarmember:
-                    if carimember in member[0] or carimember in member[2]:
-                        daftarcari.append(member)
-                if daftarcari:
-                    print(f"{'Nama':<15} {'Kontak':<15} {'Instrumen':<15}")
-                    for member in daftarcari:
-                        print(f"{member[0]:<15} {member[1]:<15} {member[2]:<15}")
-                    print("-"*50)
-                    input("Klik Enter untuk melanjutkan...")
-                else:
-                    print("Eror: Informasi yang ada cari tidak ada")
-                    input("Klik Enter untuk melanjutkan...")
-            elif opsianggota == '3':
+                    print(member[0],    member[1],      member[2])
+                input("Klik Enter untuk melanjutkan...")
+            elif pilih == '2':
+                os.system("cls")
+                print("="*40)
+                print("CARI Member".center(40))
+                print("="*40)
+                pencarian = input("Cari nama atau instrumen: ")
+                for member in daftarmember:
+                    if pencarian in member[0] or pencarian in member[2]:
+                        print("-"*40)
+                        print(member[0],    member[1],      member[2])
+                input("Klik Enter untuk melanjutkan...")
+            else: 
+                pilih == '3'
                 statuslogin = False
                 namamember = ""
                 role = ""
-                print("TERIMA KASIH SUDAH BERKUNJUNG DI KURSUS MUSIK H2H")
+                print("Logout berhasil.")
                 input("Klik Enter untuk melanjutkan...")
-            else:
-                print("Pilih antara opsi (1-3)")
-                input("Klik Enter untuk melanjutkan...")
+        else:
+            print("Akun tidak terdaftar!")
