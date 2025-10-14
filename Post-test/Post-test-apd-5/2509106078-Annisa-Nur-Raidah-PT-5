@@ -132,11 +132,12 @@ while programaktif:
                     input("Klik Enter untuk melanjutkan...")
             elif adminlogin == '2':
                 os.system("cls")
-                print("=" * 40)
-                print("Daftar Member".center(50))
-                print("=" * 40)
+                print("=" * 65)
+                print("Daftar Member".center(65))
+                print("=" * 65)
                 if daftarmember:
-                    print(f"{'Nama':<15} {'Kontak':<15} {'Instrumen':<15} {'Harga':<15}")
+                    print(f"\n{'Nama':<15} {'Kontak':<15} {'Instrumen':<15} {'Harga':<15}")
+                    print("-"*65)
                     for member in daftarmember:
                         print(f"{member[0]:<15} {member[1]:<15} {member[2]:<15} Rp {member[3]:<15,}")
                 else:
@@ -147,14 +148,15 @@ while programaktif:
                 print("=" * 30)
                 print("Edit Data Peserta".center(30))
                 print("=" * 30)
-                if daftarmember: 
+                if daftarmember:
                     jumlah = 0
                     for peserta in daftarmember:
                         jumlah += 1
                         print(f"{jumlah}. {peserta[0]} - {peserta[2]}")
-                        nomorbaru = input(f"Pilih (1-{jumlah}): ")  
+                    nomorbaru = input(f"Pilih (1-{jumlah}): ")
+                    if nomorbaru.isdigit():
                         nomorbaru = int(nomorbaru)
-                        if 1 <= nomorbaru <= jumlah: 
+                        if 1 <= nomorbaru <= jumlah:
                             posisiedit = nomorbaru - 1
                             print(f"Edit: {daftarmember[posisiedit][0]}")
                             print("Instrumen baru: 1.Gitar 2.Piano")
@@ -168,7 +170,7 @@ while programaktif:
                                     hargabaru = 750000
                                 else:
                                     hargabaru = 1000000
-                                daftarmember[posisiedit] = (namabaru, kontakbaru, instrumenbaru, hargabaru, 'member')
+                                daftarmember[posisiedit] = (namabaru, kontakbaru, instrumenbaru, hargabaru)
                                 print("Perubahan data member berhasil")
                                 input("Klik Enter untuk melanjutkan...")
                             else:
