@@ -219,7 +219,8 @@ while programaktif:
                 print("Pilihan tidak valid!")
                 input("Klik Enter untuk melanjutkan...")
         
-        elif role == 'member':
+        else: 
+            role == 'member'
             os.system("cls")
             print("="*30)
             print(("MENU MEMBER (" + namamember + ")").center(30))
@@ -245,13 +246,13 @@ while programaktif:
                 print("="*40)
                 print("CARI Member".center(40))
                 print("="*40)
-                pencarian = input("Cari nama atau instrumen: ")
-                pencarian = False
+                cari = input("Cari nama atau instrumen: ")
+                ditemukan = False
                 for nama, data in daftarmember.items():
-                    if pencarian in nama or pencarian in data['instrumen']:
+                    if cari in nama or cari in data['instrumen']:
                         print(f"{nama:<15}{data['password']:<15}{data['instrumen']}")
-                        pencarian = True
-                if not pencarian:
+                        ditemukan = True
+                if not ditemukan:
                     print("Tidak ditemukan!")
                 input("Klik Enter untuk melanjutkan...")
             
@@ -264,6 +265,3 @@ while programaktif:
             else:
                 print("Pilihan tidak valid!")
                 input("Klik Enter untuk melanjutkan...")
-        else:
-            print("Akun tidak terdaftar!")
-            statuslogin = False
