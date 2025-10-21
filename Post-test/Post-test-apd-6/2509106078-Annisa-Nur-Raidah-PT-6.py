@@ -55,9 +55,9 @@ while programaktif:
         
         elif pilih == '2':
             os.system("cls")
-            print("-"*40)
-            print("REGISTRASI AKUN".center(40))
-            print("-"*40)
+            print("-"*50)
+            print("REGISTRASI AKUN".center(50))
+            print("-"*50)
             namabaru = input("Username: ")
             if namabaru in daftarmember or namabaru in dataadmin:
                 print("Username sudah ada!")
@@ -163,33 +163,29 @@ while programaktif:
                     input("Klik Enter untuk melanjutkan...")
                 else:
                     namabaru = input("Nama baru: ")
-                    if namabaru in daftarmember or namabaru in dataadmin:
-                        print("Nama sudah ada!")
+                    kontakbaru = input("Kontak baru: ")
+                    if not kontakbaru.isdigit():
+                        print("Kontak tidak valid! Harus angka.")
                         input("Klik Enter untuk melanjutkan...")
                     else:
-                        kontakbaru = input("Kontak baru: ")
-                        if not kontakbaru.isdigit():
-                            print("Kontak tidak valid! Harus angka.")
-                            input("Klik Enter untuk melanjutkan...")
-                        else:
-                            instrumenbaru = input("Instrumen baru (gitar/piano): ")
-                            if instrumenbaru == 'gitar':
+                        instrumenbaru = input("Instrumen baru (gitar/piano): ")
+                        if instrumenbaru == 'gitar':
                                 hargabaru = 750000
                                 if namabaru != namalama:
                                     daftarmember.pop(namalama, None)
                                 daftarmember[namabaru] = {'password': kontakbaru, 'instrumen': instrumenbaru, 'harga': hargabaru, 'role': 'member'}
                                 print("Data berhasil diubah.")
                                 input("Klik Enter untuk melanjutkan...")
-                            elif instrumenbaru == 'piano':
+                        elif instrumenbaru == 'piano':
                                 hargabaru = 1000000
                                 if namabaru != namalama:
                                     daftarmember.pop(namalama, None)
                                 daftarmember[namabaru] = {'password': kontakbaru, 'instrumen': instrumenbaru, 'harga': hargabaru, 'role': 'member'}
                                 print("Data berhasil diubah.")
                                 input("Klik Enter untuk melanjutkan...")
-                            else:
+                        else:
                                 print("Instrumen tidak valid!")
-                                input("Klik Enter untuk melanjutkan...")                        
+                                input("Klik Enter untuk melanjutkan...")
 
             elif pilihan == '4':
                 os.system("cls")
@@ -226,14 +222,14 @@ while programaktif:
             print(("MENU MEMBER (" + namamember + ")").center(30))
             print("="*30)
             print("1. Tampilkan Daftar Member")
-            print("2. Cari Peserta")
+            print("2. Cari Member")
             print("3. Logout")
             pilih = input("Pilih (1-3): ")
             
             if pilih == '1':
                 os.system("cls")
                 print("="*50)
-                print("Daftar Peserta".center(50))
+                print("Daftar Member".center(50))
                 print("="*50)
                 print(f"{'Nama':<15} {'Kontak':<15} {'Instrumen':<15}")
                 print("-"*50)
