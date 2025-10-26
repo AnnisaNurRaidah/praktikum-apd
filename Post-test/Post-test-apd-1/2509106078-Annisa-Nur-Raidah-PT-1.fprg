@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Posttest 1 APD"/>
+        <attribute name="authors" value="Hype G12"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-09-14 09:37:30 AM"/>
+        <attribute name="created" value="SHlwZSBHMTI7SFlQRUcxMjsyMDI1LTA5LTEzOzExOjAyOjQ2IFBNOzIzNjg="/>
+        <attribute name="edited" value="SHlwZSBHMTI7SFlQRUcxMjsyMDI1LTA5LTE0OzA5OjM3OjMwIEFNOzY7MjQ3NQ=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="pemakaian, tarif, total" type="Integer" array="False" size=""/>
+            <output expression="&quot;masukkan total pemakaian&quot;" newline="True"/>
+            <input variable="pemakaian"/>
+            <if expression="pemakaian &lt;=100">
+                <then>
+                    <assign variable="tarif" expression="1200"/>
+                </then>
+                <else>
+                    <if expression="pemakaian &gt;300">
+                        <then>
+                            <assign variable="tarif" expression="2000"/>
+                        </then>
+                        <else>
+                            <assign variable="tarif" expression="1500"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <assign variable="total" expression="pemakaian * tarif"/>
+            <output expression="&quot;total bayar = &quot; &amp; total" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
