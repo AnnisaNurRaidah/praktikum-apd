@@ -47,6 +47,28 @@ def tampilkanmember():
         print(f"{nama:<15}{data['password']:<15}{data['instrumen']:<15}Rp {data['harga']:<15}")
     print("-"*60)
 
+def tampilkanmenuadmin():
+    os.system("cls")
+    print("="*60)
+    print("MENU ADMIN".center(60))
+    print("="*60)
+    print("1. Tambah Member")
+    print("2. Tampilkan Member")
+    print("3. Edit Member")
+    print("4. Hapus Member")
+    print("5. Logout")
+    return input("Pilih opsi (1-5): ")
+
+def tampilkanmenumember(namauser):
+    os.system("cls")
+    print("="*60)
+    print(f"MENU MEMBER ({namauser})".center(60))
+    print("="*60)
+    print("1. Tampilkan Daftar Member")
+    print("2. Cari Member")
+    print("3. Logout")
+    return input("Pilih (1-3): ")
+
 programaktif = True
 
 while programaktif:
@@ -117,13 +139,7 @@ while programaktif:
     
     else:
         if useraktif["role"] == 'admin':
-            tampilkanheader("MENU ADMIN")
-            print("1. Tambah Member")
-            print("2. Tampilkan Member")
-            print("3. Edit Member")
-            print("4. Hapus Member")
-            print("5. Logout")
-            pilihan = input("Pilih opsi (1-5): ")
+            pilihan = tampilkanmenuadmin()
             
             if pilihan == '1':
                 tampilkanheader("Tambah Member")
@@ -194,7 +210,10 @@ while programaktif:
                     tampilkanheader("HAPUS MEMBER")
                     tampilkanmember()
                     namahapus = input("\nMasukkan nama member yang ingin dihapus: ")
-                    if namahapus not in daftarmember:
+                    if namahapus == "":
+                        print("Nama tidak boleh kosong!")
+                        input("Klik Enter untuk melanjutkan...")
+                    elif namahapus not in daftarmember:
                         print("Nama tidak ditemukan!")
                         input("Klik Enter untuk melanjutkan...")
                     else:
@@ -216,20 +235,15 @@ while programaktif:
                 input("Klik Enter untuk melanjutkan...")
         
         else: 
-            useraktif["role"] == 'member'
-            namauser = ambiluser()
-            tampilkanheader(f"MENU MEMBER ({namauser})")
-            print("1. Tampilkan Daftar Member")
-            print("2. Cari Member")
-            print("3. Logout")
-            pilih = input("Pilih (1-3): ")
+            namauser = useraktif["nama"]
+            pilih = tampilkanmenumember(namauser)
             
             if pilih == '1':
                 tampilkanheader("Daftar Member")
                 print(f"{'Nama':<20} {'Kontak':<20} {'Instrumen':<20}")
                 print("-"*60)
-                listmember = list(daftarmember.keys())
-                datamember(listmember)
+                for nama, data in daftarmember.items():
+                    print(f"{nama:<20}{data['password']:<20}{data['instrumen']:<20}")
                 input("Klik Enter untuk melanjutkan...")
             
             elif pilih == '2':
