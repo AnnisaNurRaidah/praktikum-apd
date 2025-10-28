@@ -80,30 +80,34 @@ while programaktif:
         pilih = input("\nPilih opsi (1/2/3): ")
         
         if pilih == '1':
-            tampilkanheader("LAMAN LOGIN")
-            nama = input("Username: ")
-            if nama not in dataadmin and nama not in daftarmember:
-                print("Username tidak ditemukan!")
+            try:
+                tampilkanheader("LAMAN LOGIN")
+                nama = input("Username: ")
+                if nama not in dataadmin and nama not in daftarmember:
+                    raise ValueError("Username tidak ditemukan!")
+                password = input("Password: ")
+                if nama in dataadmin and password == dataadmin[nama]['password']:
+                    statuslogin = True
+                    userlogin = nama
+                    rolelogin = dataadmin[nama]['role']
+                    useraktif["nama"] = userlogin
+                    useraktif["role"] = rolelogin
+                    print("\nLogin berhasil sebagai", userlogin, "role:", rolelogin)
+                elif nama in daftarmember and password == daftarmember[nama]['password']:
+                    statuslogin = True
+                    userlogin = nama
+                    rolelogin = daftarmember[nama]['role']
+                    useraktif["nama"] = userlogin
+                    useraktif["role"] = rolelogin
+                    print("\nLogin berhasil sebagai", userlogin, "role:", rolelogin)
+                else:
+                    raise ValueError("Password salah!")
+            except ValueError as e:
+                print(f"Error: {e}")
                 input("Klik Enter untuk melanjutkan...")
-                continue
-            password = input("Password: ")
-            if nama in dataadmin and password == dataadmin[nama]['password']:
-                statuslogin = True
-                userlogin = nama
-                rolelogin = dataadmin[nama]['role']
-                useraktif["nama"] = userlogin
-                useraktif["role"] = rolelogin
-                print("\nLogin berhasil sebagai", userlogin, "role:", rolelogin)
-            elif nama in daftarmember and password == daftarmember[nama]['password']:
-                statuslogin = True
-                userlogin = nama
-                rolelogin = daftarmember[nama]['role']
-                useraktif["nama"] = userlogin
-                useraktif["role"] = rolelogin
-                print("\nLogin berhasil sebagai", userlogin, "role:", rolelogin)
-            else:
-                print("Password salah!")
-            input("Klik Enter untuk melanjutkan...")
+            except KeyError:
+                print("Error: Data pengguna tidak valid!")
+                input("Klik Enter untuk melanjutkan...") 
         
         elif pilih == '2':
             tampilkanheader("REGISTRASI AKUN")
@@ -211,17 +215,18 @@ while programaktif:
                     tampilkanmember()
                     namahapus = input("\nMasukkan nama member yang ingin dihapus: ")
                     if namahapus == "":
-                        print("Nama tidak boleh kosong!")
-                        input("Klik Enter untuk melanjutkan...")
+                        raise ValueError("Nama tidak boleh kosong!")
                     elif namahapus not in daftarmember:
-                        print("Nama tidak ditemukan!")
-                        input("Klik Enter untuk melanjutkan...")
+                        raise KeyError("Nama tidak ditemukan!")
                     else:
                         daftarmember.pop(namahapus)
                         print(f"Member '{namahapus}' dihapus.")
                         input("Klik Enter untuk melanjutkan...")
-                except KeyError:
-                    print("Error: Data member tidak ditemukan!")
+                except ValueError as e:
+                    print(f"Error: {e}")
+                    input("Klik Enter untuk melanjutkan...")
+                except KeyError as e:
+                    print(f"Error: {e}")
                     input("Klik Enter untuk melanjutkan...")
 
             elif pilihan == '5':
