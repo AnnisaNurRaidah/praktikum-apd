@@ -79,12 +79,9 @@ while programaktif:
                     print("Instrumen tidak valid! Pilih gitar atau piano.")
                     input("Klik Enter untuk melanjutkan...")
 
-        elif pilih == '3':
+        else:
             programaktif = False
             print("\nTERIMA KASIH SUDAH BERKUNJUNG DI KURSUS MUSIK H2H.")
-        else:
-            print("Pilihan tidak valid!")
-            input("Klik Enter untuk melanjutkan...")
     
     else:
         if useraktif["role"] == 'admin':
@@ -185,14 +182,11 @@ while programaktif:
                     print(f"Error: {e}")
                     input("Klik Enter untuk melanjutkan...")
 
-            elif pilihan == '5':
+            else:
                 statuslogin = False
                 useraktif["nama"] = ""
                 useraktif["role"] = ""
                 print("Logout berhasil.")
-                input("Klik Enter untuk melanjutkan...")
-            else:
-                print("Pilihan tidak valid!")
                 input("Klik Enter untuk melanjutkan...")
         
         else: 
@@ -225,7 +219,7 @@ while programaktif:
                     print(f"\nDitemukan {len(hasil)} member:")
                     table = PrettyTable()
                     table.field_names = ["Nama", "Kontak", "Instrumen", "Harga"]
-                    for nama, data in hasil:  # ← FIXED: loop hasil, bukan daftarmember
+                    for nama, data in hasil:
                         table.add_row([
                             nama, 
                             data['password'], 
@@ -236,12 +230,9 @@ while programaktif:
                     print("\nTidak ditemukan!")
                 input("\nTekan Enter untuk melanjutkan...")
             
-            elif pilih == '3':
+            else:
                 statuslogin = False
                 useraktif["nama"] = ""
                 useraktif["role"] = ""
                 print("\nLogout berhasil.")
                 input("\nTekan Enter untuk melanjutkan...")
-            else:
-                print("Pilihan tidak valid!")
-                input("Klik Enter untuk melanjutkan...")
